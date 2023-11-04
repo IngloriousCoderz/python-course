@@ -2,20 +2,48 @@ from typing import Iterable
 
 
 def average(values: Iterable[float]) -> float:
-  """
-  Computes the arithmetic mean of a sequence of numbers.
-  
-  >>> print(average([20, 30, 70]))
-  40.0
+    """
+    Computes the arithmetic mean of a sequence of numbers.
 
-  # >>> print(average([20, 30, 50]))
-  # 40.0
-  """
-  return sum(values) / len(values)
+    >>> average([20, 30, 70])
+    40.0
 
-import doctest
-doctest.testmod()
+    # >>> average([20, 30, 50])
+    # 40.0
+    """
+    return sum(values) / len(list(values))
 
-# Try executing the script and then changing 40.0 to 50.0
 
-# There are other testing tools, @see https://www.softwaretestinghelp.com/python-testing-frameworks/
+def factorial(n):
+    """
+    Computes the factorial of a number.
+
+    >>> factorial(5)
+    120
+
+    >>> factorial(5.5)
+    Traceback (most recent call last):
+    ValueError: n must be exact integer
+    """
+    import math
+
+    if not n >= 0:
+        raise ValueError("n must be >= 0")
+
+    if math.floor(n) != n:
+        raise ValueError("n must be exact integer")
+
+    if n + 1 == n:
+        raise OverflowError("n too large")
+
+    r = 1
+    f = 2
+    while f <= n:
+        r *= f
+        f += 1
+    return r
+
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
