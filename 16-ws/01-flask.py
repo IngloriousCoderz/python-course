@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, url_for, render_template
 from markupsafe import escape
 
 app = Flask(__name__)
@@ -45,3 +45,15 @@ def projects():
 @app.route('/about')
 def about():
     return 'The about page'
+
+
+# templating is similar to Handlebars
+@app.route("/hello")
+@app.route("/hello/<name>")
+def say_hello(name=None):
+    return render_template('hello.html', who=name)
+
+
+# static files can be served like so
+with app.test_request_context():
+    url_for('static', filename="style.css")
